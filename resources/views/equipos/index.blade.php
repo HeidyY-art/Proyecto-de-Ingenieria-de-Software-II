@@ -47,7 +47,7 @@
                     <a class="nav-link active" href="{{ route('equipos.index') }}">📊 Equipos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">⛹️‍♂️ Jugadores</a>
+                    <a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">📅 Partidos</a>
@@ -104,6 +104,11 @@
                                 <td class="text-center">
                                     <a href="{{ route('equipos.show', $equipo->id) }}" class="btn btn-info btn-sm">Ver</a>
                                     <a href="{{ route('equipos.edit', $equipo->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                    <form action="{{ route('equipos.destroy', $equipo->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?')">Eliminar</button>
+                                    </form>
                                 </td>
                             </tr>
                             @empty
