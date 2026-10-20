@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\JugadorController;
+use App\Http\Controllers\PartidoController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -18,6 +19,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::resource('equipos', EquipoController::class)->middleware('auth');
 
 Route::resource('jugadores', JugadorController::class)->parameters(['jugadores' => 'jugador'])->middleware('auth');
+
+Route::resource('partidos', PartidoController::class)->parameters(['partidos' => 'partido']);
 
 Route::get('/', function () {
     return redirect()->route('login');

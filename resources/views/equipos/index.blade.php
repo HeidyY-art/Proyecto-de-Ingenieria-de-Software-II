@@ -50,7 +50,7 @@
                     <a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">📅 Partidos</a>
+                    <a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">⚖️ Árbitros</a>

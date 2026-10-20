@@ -20,7 +20,7 @@
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link" href="{{ route('equipos.index') }}">📊 Equipos</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">📅 Partidos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">⚖️ Árbitros</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">🏆 Posiciones</a></li>
             </ul>

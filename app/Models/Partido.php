@@ -13,20 +13,46 @@ class Partido extends Model
         'equipo_local_id', 
         'equipo_visitante_id', 
         'fecha_partido', 
+        'jornada',
         'puntos_local', 
         'puntos_visitante', 
         'estado'
     ];
 
-    // Un partido pertenece a un equipo local
     public function equipoLocal()
     {
         return $this->belongsTo(Equipo::class, 'equipo_local_id');
     }
 
-    // Un partido pertenece a un equipo visitante
     public function equipoVisitante()
     {
         return $this->belongsTo(Equipo::class, 'equipo_visitante_id');
+    }
+
+    public function getEstadoActualAttribute()
+    {
+        
+        if ($this->estado === 'finalizado') {
+            return 'finalizado';
+        }
+
+        $ahora = Carbon::now();
+        $inicioPartido = Carbon::parse($this->fecha_partido);
+        $finEstimadoPartido = (clone $inicioPartido)->addHours(2);
+        
+        if ($ahora->between($inicioPartido, $finEstimadoPartido)) {
+            if ($this->estado !== 'en_curso') {
+                $this->update(['estado' => 'en_curso']);
+            }
+            return 'en_curso';
+        }
+
+        if ($ahora->greaterThan($finEstimadoPartido)) {
+            if ($this->estado !== 'finalizado') {
+                $this->update(['estado' => 'finalizado']);
+            }
+            return 'finalizado';
+        }
+        return 'programado';
     }
 }
