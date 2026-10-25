@@ -49,16 +49,16 @@
 
         <div class="card shadow-sm border-0">
             <div class="card-body">
-                <table class="table table-hover align-middle">
+                <table class="table table-bordered table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
                             <th>Jornada</th>
                             <th>Local</th>
-                            <th class="text-center">Resultado</th>
+                            <th>Resultado</th>
                             <th>Visitante</th>
                             <th>Fecha y Hora</th>
                             <th>Estado</th>
-                            <th class="text-end">Acciones</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +80,7 @@
                                         <span class="badge bg-info text-dark">Programado</span>
                                     @endif
                                 </td>
-                                <td class="text-end">
+                                <td class="text-center">
                                     <a href="{{ route('partidos.show', $partido->id) }}" class="btn btn-sm btn-info text-white">Ver</a>
                                     <a href="{{ route('partidos.edit', $partido->id) }}" class="btn btn-sm btn-warning">Editar</a>
                                     <form action="{{ route('partidos.destroy', $partido->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este partido?');">

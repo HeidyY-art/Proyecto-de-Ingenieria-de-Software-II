@@ -8,10 +8,21 @@ use Illuminate\Http\Request;
 
 class JugadorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jugadores = Jugador::with('equipo')->get();
-        return view('jugadores.index', compact('jugadores'));
+        $search = $request->input('search');
+
+        $jugadores = Jugador::with('equipo')
+            ->when($search, function ($query, $search) {
+                return $query->where('nombre', 'like', "%{$search}%")
+                            ->orWhere('apellido', 'like', "%{$search}%")
+                            ->orWhere('posicion', 'like', "%{$search}%")
+                            ->orWhereHas('equipo', function ($q) use ($search) { // <-- ¡Aquí faltaba la palabra "use"!
+                                $q->where('nombre', 'like', "%{$search}%");
+                            });
+            })->paginate(7);
+
+        return view('jugadores.index', compact('jugadores', 'search'));
     }
 
     public function create()
@@ -89,3 +100,4 @@ class JugadorController extends Controller
         return redirect()->route('jugadores.index')->with('success', '¡Jugador eliminado!');
     }
 }
+

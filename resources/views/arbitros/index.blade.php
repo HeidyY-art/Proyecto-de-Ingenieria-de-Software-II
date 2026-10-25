@@ -36,7 +36,7 @@
     <!-- Contenido Principal -->
     <div class="main-content" id="mainContent">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Directorio de Árbitros</h2>
+            <h2>Gestión de Árbitros</h2>
             <a href="{{ route('arbitros.create') }}" class="btn btn-primary">+ Registrar Árbitro</a>
         </div>
 
@@ -47,23 +47,35 @@
             </div>
         @endif
 
+        <form action="{{ route('arbitros.index') }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" value="{{ $search ?? '' }}" placeholder="Buscar...">
+                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                @if(isset($search))
+                    <a href="{{ route('arbitros.index') }}" class="btn btn-outline-danger">Limpiar</a>
+                @endif
+            </div>
+        </form>
+
         <div class="card shadow-sm border-0">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle">
+                    <table class="table table-bordered table-hover align-middle">
                         <thead class="table-dark">
                             <tr>
+                                <th>ID</th>
                                 <th>Nombre Completo</th>
                                 <th>Experiencia</th>
-                                <th class="text-end">Acciones</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($arbitros as $arbitro)
                                 <tr>
-                                    <td class="fw-bold">{{ $arbitro->nombre }} {{ $arbitro->apellido }}</td>
+                                    <td>{{ $arbitro->id }}</td>
+                                    <td>{{ $arbitro->nombre }} {{ $arbitro->apellido }}</td>
                                     <td>{{ $arbitro->experiencia ?? 'No especificada' }}</td>
-                                    <td class="text-end">
+                                    <td class="text-center">
                                         <a href="{{ route('arbitros.show', $arbitro) }}" class="btn btn-sm btn-info text-white">Ver</a>
                                         <a href="{{ route('arbitros.edit', $arbitro) }}" class="btn btn-sm btn-warning">Editar</a>
                                         <form action="{{ route('arbitros.destroy', $arbitro) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este árbitro?');">
@@ -82,6 +94,11 @@
                     </table>
                 </div>
             </div>
+
+            <div class="mt-4 d-flex justify-content-center">
+                {{ $arbitros->appends(['search' => $search])->links() }}
+            </div>
+
         </div>
     </div>
 

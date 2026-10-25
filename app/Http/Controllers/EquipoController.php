@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 
 class EquipoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $equipos = Equipo::all();
-        return view('equipos.index', compact('equipos'));
+        $search = $request->input('search');
+
+        $equipos = Equipo::when($search, function ($query, $search) {
+            return $query->where('nombre', 'like', "%{$search}%")
+                        ->orWhere('ciudad', 'like', "%{$search}%")
+                        ->orWhere('entrenador', 'like', "%{$search}%");
+        })->paginate(7);
+
+        return view('equipos.index', compact('equipos', 'search'));
     }
 
     public function create()

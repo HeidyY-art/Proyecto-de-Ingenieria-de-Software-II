@@ -45,6 +45,16 @@
             </div>
         @endif
 
+        <form action="{{ route(request()->route()->getName()) }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" value="{{ $search ?? '' }}" placeholder="Buscar...">
+                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                @if(isset($search))
+                    <a href="{{ route(request()->route()->getName()) }}" class="btn btn-outline-danger">Limpiar</a>
+                @endif
+            </div>
+        </form>
+
         <div class="card shadow-sm border-0">
             <div class="card-body">
                 <table class="table table-bordered table-striped align-middle mb-0">
@@ -85,6 +95,9 @@
                         @endisset
                     </tbody>
                 </table>
+            </div>
+            <div class="mt-4 d-flex justify-content-center">
+                {{ $jugadores->appends(['search' => $search])->links() }}
             </div>
         </div>
     </div>

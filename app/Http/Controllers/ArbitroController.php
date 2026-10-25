@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 
 class ArbitroController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $arbitros = Arbitro::all();
-        return view('arbitros.index', compact('arbitros'));
+        $search = $request->input('search');
+
+        $arbitros = Arbitro::when($search, function ($query, $search) {
+            return $query->where('nombre', 'like', "%{$search}%")
+                        ->orWhere('apellido', 'like', "%{$search}%")
+                        ->orWhere('experiencia', 'like', "%{$search}%");
+        })->paginate(7);
+        return view('arbitros.index', compact('arbitros', 'search'));
     }
 
     public function create()
