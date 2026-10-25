@@ -63,7 +63,20 @@ class EquipoController extends Controller
 
     public function destroy(Equipo $equipo)
     {
+        $partidosFinalizados = $equipo->partidosLocales()->where('estado', 'finalizado')->count() 
+                            + $equipo->partidosVisitantes()->where('estado', 'finalizado')->count();
+
+        if ($partidosFinalizados > 0) {
+            return redirect()->route('equipos.index')
+                ->with('error', '⚠️ No se puede eliminar el equipo porque cuenta con partidos finalizados en su historial.');
+        }
+
+        $equipo->partidosLocales()->where('estado', 'programado')->delete();
+        $equipo->partidosVisitantes()->where('estado', 'programado')->delete();
+
         $equipo->delete();
-        return redirect()->route('equipos.index')->with('success', 'Equipo eliminado exitosamente.');
+
+        return redirect()->route('equipos.index')
+            ->with('success', '¡Equipo y sus jugadores eliminados correctamente (partidos futuros depurados)!');
     }
 }

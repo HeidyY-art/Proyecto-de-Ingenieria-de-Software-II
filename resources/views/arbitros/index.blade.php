@@ -78,7 +78,7 @@
                                     <td class="text-center">
                                         <a href="{{ route('arbitros.show', $arbitro) }}" class="btn btn-sm btn-info text-white">Ver</a>
                                         <a href="{{ route('arbitros.edit', $arbitro) }}" class="btn btn-sm btn-warning">Editar</a>
-                                        <form action="{{ route('arbitros.destroy', $arbitro) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este árbitro?');">
+                                        <form action="{{ route('arbitros.destroy', $arbitro) }}" method="POST" class="d-inline form-eliminar">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
@@ -104,12 +104,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const toggleBtn = document.getElementById('toggleSidebar');
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('mainContent');
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('expanded');
+        document.addEventListener('DOMContentLoaded', function () {
+            const formularios = document.querySelectorAll('.form-eliminar');
+
+            formularios.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); 
+
+                    let confirmacion = confirm("⚠️ ¡ADVERTENCIA DE ÁRBITRO!\n\nSi eliminas este árbitro, se desvinculará automáticamente de sus partidos programados futuros.\n\n¿Deseas aceptar y continuar?");
+
+                    if (confirmacion) {
+                        this.submit();
+                    } else {
+                        console.log('Eliminación de árbitro cancelada.');
+                    }
+                });
+            });
         });
     </script>
 </body>

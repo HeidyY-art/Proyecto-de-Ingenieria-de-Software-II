@@ -62,7 +62,18 @@ class ArbitroController extends Controller
 
     public function destroy(Arbitro $arbitro)
     {
+        $partidosFinalizados = $arbitro->partidos()->where('estado', 'finalizado')->count();
+
+        if ($partidosFinalizados > 0) {
+            return redirect()->route('arbitros.index')
+                ->with('error', '⚠️ No se puede eliminar el árbitro porque cuenta con partidos finalizados en su historial.');
+        }
+
+        $arbitro->partidos()->where('estado', 'programado')->detach();
+
         $arbitro->delete();
-        return redirect()->route('arbitros.index')->with('success', '¡Árbitro eliminado correctamente!');
+
+        return redirect()->route('arbitros.index')
+            ->with('success', '¡Árbitro eliminado correctamente y desvinculado de su agenda futura!');
     }
 }

@@ -103,10 +103,10 @@
                                 <td class="text-center">
                                     <a href="{{ route('equipos.show', $equipo->id) }}" class="btn btn-info btn-sm">Ver</a>
                                     <a href="{{ route('equipos.edit', $equipo->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                                    <form action="{{ route('equipos.destroy', $equipo->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('equipos.destroy', $equipo) }}" method="POST" class="d-inline form-eliminar">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?')">Eliminar</button>
+                                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
@@ -124,7 +124,25 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const formularios = document.querySelectorAll('.form-eliminar');
+
+            formularios.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    let confirmacion = confirm("⚠️ ¡ADVERTENCIA!\n\nSi deseas eliminar este equipo, TODOS LOS JUGADORES asociados también serán eliminados permanentemente de la base de datos.\n\n¿Deseas aceptar y continuar?");
+
+                    if (confirmacion) {
+                        this.submit(); 
+                    } else {
+                        console.log('Eliminación cancelada por el usuario.');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
