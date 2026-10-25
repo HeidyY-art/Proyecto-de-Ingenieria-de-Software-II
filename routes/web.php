@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\PartidoController;
+use App\Http\Controllers\ArbitroController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -21,6 +22,8 @@ Route::resource('equipos', EquipoController::class)->middleware('auth');
 Route::resource('jugadores', JugadorController::class)->parameters(['jugadores' => 'jugador'])->middleware('auth');
 
 Route::resource('partidos', PartidoController::class)->parameters(['partidos' => 'partido']);
+
+Route::resource('arbitros', ArbitroController::class)->parameters(['arbitros' => 'arbitro']);
 
 Route::get('/', function () {
     return redirect()->route('login');

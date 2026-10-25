@@ -43,21 +43,11 @@
         <div>
             <h4 class="text-white text-center py-3 border-bottom border-secondary mb-4">🏀 Liga Básquet</h4>
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('equipos.index') }}">📊 Equipos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">⚖️ Árbitros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">🏆 Posiciones</a>
-                </li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('equipos.index') }}">📊 Equipos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('arbitros.index') }}">⚖️ Árbitros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">🏆 <span>Posiciones</span></a></li>
             </ul>
         </div>
         <div class="border-top border-secondary pt-3">

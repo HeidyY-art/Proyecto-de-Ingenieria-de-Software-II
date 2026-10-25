@@ -19,9 +19,9 @@
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link active" href="{{ route('equipos.index') }}">📊 Equipos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">📅 Partidos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">⚖️ Árbitros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">🏆 Posiciones</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('arbitros.index') }}">⚖️ Árbitros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">🏆 <span>Posiciones</span></a></li>
             </ul>
         </div>
         <div class="border-top border-secondary pt-3">
@@ -48,7 +48,7 @@
                 <h5 class="mt-4">Jugadores de este equipo:</h5>
                 <ul>
                     @forelse($equipo->jugadores ?? [] as $jugador)
-                        <li>{{ $jugador->nombre }} {{ $jugador->apellido }} (Nº {{ $jugador->numero_camisa }})</li>
+                        <li>{{ $jugador->nombre }} {{ $jugador->apellido }} (Nº {{ $jugador->numero_camiseta }})</li>
                     @empty
                         <li class="text-muted">No hay jugadores registrados en este equipo todavía.</li>
                     @endforelse
