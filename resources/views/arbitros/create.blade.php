@@ -16,16 +16,12 @@
 
     <div class="sidebar p-3 shadow" id="sidebar">
         <div>
-            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary mb-3">
-                <h4 class="text-white mb-0 fs-5 text-truncate">🏀 Liga Básquet</h4>
-                <button class="btn btn-sm btn-outline-light" id="toggleSidebar" title="Contraer menú">☰</button>
-            </div>
+            <h4 class="text-white text-center py-3 border-bottom border-secondary mb-4">🏀 Liga Básquet</h4>
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link" href="{{ route('equipos.index') }}">📊 Equipos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('arbitros.index') }}">⚖️ Árbitros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">🏆 <span>Posiciones</span></a></li>
             </ul>
         </div>
         <div class="border-top border-secondary pt-3">
@@ -37,12 +33,14 @@
     </div>
 
     <div class="main-content" id="mainContent">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Registrar Nuevo Árbitro</h2>
+           <a href="{{ route('arbitros.index') }}" class="btn btn-secondary">Volver al Listado</a>
+                    </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-sm border-0">
-                    <div class="card-header bg-dark text-white">
-                        <h5 class="mb-0">⚖️ Registrar Nuevo Árbitro</h5>
-                    </div>
                     <div class="card-body">
                         <form action="{{ route('arbitros.store') }}" method="POST">
                             @csrf
@@ -72,7 +70,6 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('arbitros.index') }}" class="btn btn-secondary">Cancelar</a>
                                 <button type="submit" class="btn btn-primary">Guardar Árbitro</button>
                             </div>
                         </form>

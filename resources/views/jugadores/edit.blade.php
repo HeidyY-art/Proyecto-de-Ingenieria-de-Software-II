@@ -22,7 +22,6 @@
                 <li class="nav-item"><a class="nav-link active" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('arbitros.index') }}">⚖️ Árbitros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">🏆 <span>Posiciones</span></a></li>
             </ul>
         </div>
         <div class="border-top border-secondary pt-3">
@@ -71,8 +70,18 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="posicion" class="form-label">Posición</label>
-                        <input type="text" class="form-control" id="posicion" name="posicion" value="{{ old('posicion', $jugador->posicion ?? '') }}" required placeholder="Ej. Base, Pívot, Escolta...">
+                        <label for="posicion" class="form-label fw-bold">Posición</label>
+                        <select class="form-select @error('posicion') is-invalid @enderror" id="posicion" name="posicion" required>
+                            <option value="" disabled {{ old('posicion', $jugador->posicion ?? '') == '' ? 'selected' : '' }}>Seleccione una posición...</option>
+                            <option value="Base" {{ old('posicion', $jugador->posicion ?? '') == 'Base' ? 'selected' : '' }}>Base</option>
+                            <option value="Escolta" {{ old('posicion', $jugador->posicion ?? '') == 'Escolta' ? 'selected' : '' }}>Escolta</option>
+                            <option value="Alero" {{ old('posicion', $jugador->posicion ?? '') == 'Alero' ? 'selected' : '' }}>Alero</option>
+                            <option value="Ala-Pívot" {{ old('posicion', $jugador->posicion ?? '') == 'Ala-Pívot' ? 'selected' : '' }}>Ala-Pívot</option>
+                            <option value="Pívot" {{ old('posicion', $jugador->posicion ?? '') == 'Pívot' ? 'selected' : '' }}>Pívot</option>
+                        </select>
+                        @error('posicion')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">

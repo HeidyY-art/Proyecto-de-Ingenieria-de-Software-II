@@ -17,16 +17,12 @@
     <!-- Menú Lateral -->
     <div class="sidebar p-3 shadow" id="sidebar">
         <div>
-            <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-secondary mb-3">
-                <h4 class="text-white mb-0 fs-5 text-truncate">🏀 Liga Básquet</h4>
-                <button class="btn btn-sm btn-outline-light" id="toggleSidebar" title="Contraer menú">☰</button>
-            </div>
+            <h4 class="text-white text-center py-3 border-bottom border-secondary mb-4">🏀 Liga Básquet</h4>
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link" href="{{ route('equipos.index') }}">📊 Equipos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('arbitros.index') }}">⚖️ Árbitros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">🏆 <span>Posiciones</span></a></li>
             </ul>
         </div>
         <div class="border-top border-secondary pt-3">
@@ -40,7 +36,7 @@
     <!-- Contenido Principal -->
     <div class="main-content" id="mainContent">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>⚖️ Directorio de Árbitros</h2>
+            <h2>Directorio de Árbitros</h2>
             <a href="{{ route('arbitros.create') }}" class="btn btn-primary">+ Registrar Árbitro</a>
         </div>
 

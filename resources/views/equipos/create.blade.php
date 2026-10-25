@@ -23,7 +23,6 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('arbitros.index') }}">⚖️ Árbitros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">🏆 <span>Posiciones</span></a></li>
             </ul>
         </div>
         <div class="border-top border-secondary pt-3">

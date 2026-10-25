@@ -23,7 +23,6 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('jugadores.index') }}">⛹️‍♂️ Jugadores</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ route('partidos.index') }}">📅 Partidos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('arbitros.index') }}">⚖️ Árbitros</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">🏆 <span>Posiciones</span></a></li>
             </ul>
         </div>
         <div class="border-top border-secondary pt-3">
@@ -38,7 +37,7 @@
     <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Editar Partido</h2>
-            <a href="{{ route('partidos.index') }}" class="btn btn-secondary">Volver</a>
+            <a href="{{ route('partidos.index') }}" class="btn btn-secondary">Volver al listado </a>
         </div>
 
         @if ($errors->any())
