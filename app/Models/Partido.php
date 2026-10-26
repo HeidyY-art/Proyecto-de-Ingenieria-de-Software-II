@@ -19,6 +19,11 @@ class Partido extends Model
         'estado'
     ];
 
+    public function arbitros()
+    {
+        return $this->belongsToMany(Arbitro::class, 'partido_arbitro', 'partido_id', 'arbitro_id');
+    }
+
     public function equipoLocal()
     {
         return $this->belongsTo(Equipo::class, 'equipo_local_id');

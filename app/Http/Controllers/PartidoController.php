@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Partido;
 use App\Models\Equipo;
+use App\Models\Arbitro;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -43,9 +44,11 @@ class PartidoController extends Controller
 
     public function create()
     {
+        $arbitros = Arbitro::all(); 
         $equipos = Equipo::all();
-        return view('partidos.create', compact('equipos'));
-    }
+        
+        return view('partidos.create', compact('arbitros', 'equipos'));
+    } 
 
     public function store(Request $request)
     {
@@ -57,11 +60,13 @@ class PartidoController extends Controller
             'puntos_local' => 'nullable|integer|min:0',
             'puntos_visitante' => 'nullable|integer|min:0',
             'estado' => 'required|in:programado,en_curso,finalizado',
+            'arbitro_id' => 'required|exists:arbitros,id',
         ], [
             'equipo_local_id.different' => 'El equipo local y el visitante no pueden ser el mismo.',
         ]);
 
         Partido::create($request->all());
+        $partido->arbitros()->sync([$request->arbitro_id]);
 
         return redirect()->route('partidos.index')->with('success', '¡Partido programado exitosamente!');
     }
@@ -73,8 +78,9 @@ class PartidoController extends Controller
 
     public function edit(Partido $partido)
     {
-        $equipos = Equipo::all();
-        return view('partidos.edit', compact('partido', 'equipos'));
+        $arbitros = Arbitro::all(); 
+        $equipos = Equipo::all(); 
+        return view('partidos.edit', compact('partido', 'arbitros', 'equipos'));
     }
 
     public function update(Request $request, Partido $partido)
@@ -87,12 +93,13 @@ class PartidoController extends Controller
             'puntos_local' => 'nullable|integer|min:0',
             'puntos_visitante' => 'nullable|integer|min:0',
             'estado' => 'required|in:programado,en_curso,finalizado',
+            'arbitro_id' => 'required|exists:arbitros,id',
         ], [
             'equipo_local_id.different' => 'El equipo local y el visitante no pueden ser el mismo.',
         ]);
 
         $partido->update($request->all());
-
+        $partido->arbitros()->sync([$request->arbitro_id]);
         return redirect()->route('partidos.index')->with('success', '¡Partido actualizado correctamente!');
     }
 

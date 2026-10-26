@@ -92,6 +92,23 @@
                         </div>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="arbitro_id" class="form-label">Árbitro Asignado</label>
+                        <select name="arbitro_id" id="arbitro_id" class="form-select" required>
+                            <option value="" disabled selected>-- Seleccione un árbitro --</option>
+                            
+                            @foreach($arbitros as $arbitro)
+                                <option value="{{ $arbitro->id }}" 
+                                    {{ (old('arbitro_id', optional($partido->arbitros->first())->id ?? '') == $arbitro->id) ? 'selected' : '' }}>
+                                    {{ $arbitro->nombre }} {{ $arbitro->apellido ?? '' }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('arbitro_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="puntos_local" class="form-label">Puntos Local</label>
