@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('equipo_visitante_id')->constrained('equipos')->onDelete('cascade');
             $table->dateTime('fecha_partido');
             $table->integer('jornada')->default(1);
+            $table->string('lugar')->nullable();
             $table->integer('puntos_local')->default(0);
             $table->integer('puntos_visitante')->default(0);
             $table->enum('estado', ['programado', 'en_curso', 'finalizado'])->default('programado');

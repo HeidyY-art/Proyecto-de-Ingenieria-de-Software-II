@@ -13,8 +13,7 @@ class EquipoController extends Controller
 
         $equipos = Equipo::when($search, function ($query, $search) {
             return $query->where('nombre', 'like', "%{$search}%")
-                        ->orWhere('ciudad', 'like', "%{$search}%")
-                        ->orWhere('entrenador', 'like', "%{$search}%");
+                        ->orWhere('ciudad', 'like', "%{$search}%");
         })->paginate(7);
 
         return view('equipos.index', compact('equipos', 'search'));
@@ -30,7 +29,6 @@ class EquipoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255|unique:equipos',
             'ciudad' => 'required|string|max:255',
-            'entrenador' => 'nullable|string|max:255',
         ]);
 
         Equipo::create($request->all());
@@ -53,7 +51,6 @@ class EquipoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255|unique:equipos,nombre,' . $equipo->id,
             'ciudad' => 'required|string|max:255',
-            'entrenador' => 'nullable|string|max:255',
         ]);
 
         $equipo->update($request->all());

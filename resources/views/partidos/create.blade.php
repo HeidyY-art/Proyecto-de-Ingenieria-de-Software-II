@@ -52,7 +52,7 @@
 
         <div class="card shadow-sm border-0 col-md-8 mx-auto">
             <div class="card-body p-4">
-                <form action="{{ route('partidos.store') }}" method="POST">
+                <form action="{{ route('partidos.store') }}" method="POST" onsubmit="this.querySelector('button[type=submit]').disabled = true; this.querySelector('button[type=submit]').innerText = 'Guardando...';">
                     @csrf
 
                     <div class="row">
@@ -93,21 +93,28 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="arbitro_id" class="form-label">Árbitro Asignado</label>
-                        <select name="arbitro_id" id="arbitro_id" class="form-select" required>
-                            <option value="" disabled selected>-- Seleccione un árbitro --</option>
-                            
-                            @foreach($arbitros as $arbitro)
-                                <option value="{{ $arbitro->id }}" 
-                                    {{ (old('arbitro_id') == $arbitro->id) ? 'selected' : '' }}>
-                                    {{ $arbitro->nombre }} {{ $arbitro->apellido ?? '' }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('arbitro_id')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="lugar" class="form-label">Lugar / Sede del Encuentro</label>
+                            <input type="text" name="lugar" id="lugar" class="form-control" 
+                                value="{{ old('lugar', $partido->lugar ?? '') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="arbitro_id" class="form-label">Árbitro Asignado</label>
+                            <select name="arbitro_id" id="arbitro_id" class="form-select" required>
+                                <option value="" disabled selected>-- Seleccione un árbitro --</option>
+                                
+                                @foreach($arbitros as $arbitro)
+                                    <option value="{{ $arbitro->id }}" 
+                                        {{ (old('arbitro_id') == $arbitro->id) ? 'selected' : '' }}>
+                                        {{ $arbitro->nombre }} {{ $arbitro->apellido ?? '' }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('arbitro_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="row">

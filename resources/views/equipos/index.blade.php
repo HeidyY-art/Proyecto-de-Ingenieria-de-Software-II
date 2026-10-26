@@ -88,7 +88,6 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Ciudad</th>
-                            <th>Entrenador</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -99,7 +98,6 @@
                                 <td>{{ $equipo->id }}</td>
                                 <td>{{ $equipo->nombre }}</td>
                                 <td>{{ $equipo->ciudad }}</td>
-                                <td>{{ $equipo->entrenador ?? 'No asignado' }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('equipos.show', $equipo->id) }}" class="btn btn-info btn-sm">Ver</a>
                                     <a href="{{ route('equipos.edit', $equipo->id) }}" class="btn btn-warning btn-sm">Editar</a>
@@ -117,10 +115,10 @@
                             @endforelse
                         @endisset
                     </tbody>
-                </table>
-            </div>
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $equipos->appends(['search' => $search])->links() }}
+                </table>            
+                <div class="mt-4 d-flex justify-content-center">
+                    {{ $equipos->appends(['search' => $search])->links('vendor.pagination.bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>

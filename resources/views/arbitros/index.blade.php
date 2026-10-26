@@ -92,13 +92,11 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="mt-4 d-flex justify-content-center">
+                        {{ $arbitros->appends(['search' => $search])->links('vendor.pagination.bootstrap-5') }}
+                    </div>
                 </div>
             </div>
-
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $arbitros->appends(['search' => $search])->links() }}
-            </div>
-
         </div>
     </div>
 

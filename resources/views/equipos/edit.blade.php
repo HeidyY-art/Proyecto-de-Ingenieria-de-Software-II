@@ -62,11 +62,6 @@
                         <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ old('ciudad', $equipo->ciudad) }}" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="entrenador" class="form-label">Entrenador</label>
-                        <input type="text" class="form-control" id="entrenador" name="entrenador" value="{{ old('entrenador', $equipo->entrenador) }}">
-                    </div>
-
                     <button type="submit" class="btn btn-primary">Actualizar Equipo</button>
                 </form>
             </div>

@@ -14,6 +14,7 @@ class Partido extends Model
         'equipo_visitante_id', 
         'fecha_partido', 
         'jornada',
+        'lugar',
         'puntos_local', 
         'puntos_visitante', 
         'estado'

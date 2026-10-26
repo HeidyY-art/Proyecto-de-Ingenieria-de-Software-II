@@ -57,6 +57,7 @@ class PartidoController extends Controller
             'equipo_visitante_id' => 'required|exists:equipos,id',
             'fecha_partido' => 'required|date',
             'jornada' => 'required|integer|min:1',
+            'lugar' => 'required|string|max:255',
             'puntos_local' => 'nullable|integer|min:0',
             'puntos_visitante' => 'nullable|integer|min:0',
             'estado' => 'required|in:programado,en_curso,finalizado',
@@ -65,7 +66,7 @@ class PartidoController extends Controller
             'equipo_local_id.different' => 'El equipo local y el visitante no pueden ser el mismo.',
         ]);
 
-        Partido::create($request->all());
+        $partido = Partido::create($request->all());
         $partido->arbitros()->sync([$request->arbitro_id]);
 
         return redirect()->route('partidos.index')->with('success', '¡Partido programado exitosamente!');
@@ -90,6 +91,7 @@ class PartidoController extends Controller
             'equipo_visitante_id' => 'required|exists:equipos,id',
             'fecha_partido' => 'required|date',
             'jornada' => 'required|integer|min:1',
+            'lugar' => 'required|string|max:255',
             'puntos_local' => 'nullable|integer|min:0',
             'puntos_visitante' => 'nullable|integer|min:0',
             'estado' => 'required|in:programado,en_curso,finalizado',

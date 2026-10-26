@@ -41,7 +41,6 @@
             <div class="card-body">
                 <h4 class="card-title text-primary mb-3">{{ $equipo->nombre }}</h4>
                 <p class="card-text"><strong>Ciudad:</strong> {{ $equipo->ciudad }}</p>
-                <p class="card-text"><strong>Entrenador:</strong> {{ $equipo->entrenador ?? 'No asignado' }}</p>
                 
                 <hr>
                 <h5 class="mt-4">Jugadores de este equipo:</h5>

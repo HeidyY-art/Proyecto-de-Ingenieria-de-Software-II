@@ -10,6 +10,7 @@
         .sidebar .nav-link { color: #adb5bd; padding: 12px 20px; border-radius: 6px; margin-bottom: 5px; }
         .sidebar .nav-link:hover, .sidebar .nav-link.active { color: #fff; background-color: #0d6efd; }
         .main-content { margin-left: 260px; padding: 30px; }
+        .pagination svg, nav svg { width: 1rem; height: 1rem;display: inline-block;vertical-align: middle;}
     </style>
 </head>
 <body>
@@ -95,9 +96,9 @@
                         @endisset
                     </tbody>
                 </table>
-            </div>
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $jugadores->appends(['search' => $search])->links() }}
+                <div class="mt-4 d-flex flex-column align-items-center">
+                    {{ $jugadores->appends(['search' => $search])->links('vendor.pagination.bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
